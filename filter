@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+
+const data = [
+  { name: "akash", email: "akash@gmail.com" },
+  { name: "vivek", email: "vivek@gmail.com" }
+];
+
+export function App(props) {
+  const [name, setName] = useState("");
+  const [res, setRes] = useState([]);
+
+  const handleChange = (e) => {
+    const newName = e.target.value;
+    setName(newName);
+
+    const result = data.filter(some => some.name.toLowerCase().includes(newName.toLowerCase()));
+    setRes(result);
+  }
+
+  return (
+    <div className='App'>
+      <input 
+        placeholder="search your name here" 
+        value={name} 
+        onChange={handleChange}
+      />
+      {res.length > 0 ? (
+        res.map((e, index) => (
+          <div key={index}>
+            <div>Name : <span>{e.name}</span></div>
+            <div>Email : <span>{e.email}</span></div>
+          </div>
+        ))
+      ) : (
+        <div>No results found</div>
+      )}
+    </div>
+  );
+}
+
+// Log to console
+console.log('Hello console');
